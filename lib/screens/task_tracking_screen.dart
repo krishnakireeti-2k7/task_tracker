@@ -5,8 +5,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:task_tracker/models/task.dart';
 import 'package:task_tracker/providers/task_providers.dart';
 
-/// This screen lets user start a task timer, stop it, and enter description.
-/// On stop, it saves the task and returns to home screen.
 class TaskTrackingScreen extends ConsumerStatefulWidget {
   const TaskTrackingScreen({super.key});
 
@@ -110,6 +108,25 @@ class _TaskTrackingScreenState extends ConsumerState<TaskTrackingScreen> {
 
               const SizedBox(height: 24),
 
+              // Always show the description field
+              const Text(
+                'Description',
+                style: TextStyle(fontSize: 16, color: Colors.grey),
+              ),
+              const SizedBox(height: 8),
+              TextField(
+                controller: descriptionController,
+                maxLines: 4,
+                decoration: InputDecoration(
+                  hintText: 'What did you work on?',
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                ),
+              ),
+
+              const SizedBox(height: 24),
+
               if (!isTracking)
                 ElevatedButton(
                   onPressed: _startTimer,
@@ -124,37 +141,16 @@ class _TaskTrackingScreenState extends ConsumerState<TaskTrackingScreen> {
                 ),
 
               if (isTracking)
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: [
-                    ElevatedButton(
-                      onPressed: _stopTimer,
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.blue,
-                        minimumSize: const Size.fromHeight(50),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(16),
-                        ),
-                      ),
-                      child: const Text('Stop', style: TextStyle(fontSize: 18)),
+                ElevatedButton(
+                  onPressed: _stopTimer,
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.blue,
+                    minimumSize: const Size.fromHeight(50),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(16),
                     ),
-                    const SizedBox(height: 24),
-                    const Text(
-                      'Description',
-                      style: TextStyle(fontSize: 16, color: Colors.grey),
-                    ),
-                    const SizedBox(height: 8),
-                    TextField(
-                      controller: descriptionController,
-                      maxLines: 4,
-                      decoration: InputDecoration(
-                        hintText: 'What did you work on?',
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(12),
-                        ),
-                      ),
-                    ),
-                  ],
+                  ),
+                  child: const Text('Stop', style: TextStyle(fontSize: 18)),
                 ),
             ],
           ),
