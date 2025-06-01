@@ -118,7 +118,7 @@ class _TaskTrackingScreenState extends ConsumerState<TaskTrackingScreen> {
                 controller: descriptionController,
                 maxLines: 4,
                 decoration: InputDecoration(
-                  hintText: 'What did you work on?',
+                  hintText: 'What are you working on now?',
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(12),
                   ),
@@ -126,6 +126,22 @@ class _TaskTrackingScreenState extends ConsumerState<TaskTrackingScreen> {
               ),
 
               const SizedBox(height: 24),
+
+              Wrap(
+                spacing: 8,
+                children: [
+                  for(final lable in ['Work','Study','Relax','Exericse'])
+                  ActionChip(label: Text(lable),
+                  onPressed: () {
+                    descriptionController.text = lable;
+                    descriptionController.selection = TextSelection.fromPosition(
+                      TextPosition(offset: descriptionController.text.length),
+                    );
+                    setState(() {});
+                  },
+                  )
+                ],
+              ),
 
               if (!isTracking)
                 ElevatedButton(
