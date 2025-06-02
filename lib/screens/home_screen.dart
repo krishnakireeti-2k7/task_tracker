@@ -11,6 +11,21 @@ class HomeScreen extends ConsumerWidget {
     final tasks = ref.watch(taskProvider);
     return Scaffold(
       appBar: AppBar(title: Text('Task Tracker'), centerTitle: true),
+      drawer: Drawer(
+        child: ListView(
+          padding: EdgeInsets.zero,
+          children: [
+            DrawerHeader(child: Text('Menu'),decoration: BoxDecoration(color: Colors.blue),),
+            ListTile(
+              leading: Icon(Icons.home),
+              title: Text('Home'),
+              onTap: () {
+                Navigator.pop(context); // Close the drawer
+              },
+            ),
+          ],
+        ),
+      ),
       body:
           tasks.isEmpty
               ? const Center(child: Text('No tasks Added yet. Start Working!'))
