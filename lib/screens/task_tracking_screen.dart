@@ -72,103 +72,97 @@ class _TaskTrackingScreenState extends ConsumerState<TaskTrackingScreen> {
     final dateFormat = DateFormat.yMMMd().add_jm();
 
     return Scaffold(
-      backgroundColor: Colors.white,
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.all(24),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const Text(
-                'Task Tracker',
-                style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold),
-              ),
-              const SizedBox(height: 16),
-
-              const Text(
-                'Start Time',
-                style: TextStyle(fontSize: 16, color: Colors.grey),
-              ),
-              Text(
-                startTime != null ? dateFormat.format(startTime!) : '--:--',
-                style: const TextStyle(fontSize: 18),
-              ),
-
-              const SizedBox(height: 32),
-
-              Center(
-                child: Text(
-                  _formatDuration(elapsed),
-                  style: const TextStyle(
-                    fontSize: 48,
+          child: SingleChildScrollView(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  'Task Tracker',
+                  style: Theme.of(context).textTheme.headlineMedium?.copyWith(
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-              ),
-
-              const SizedBox(height: 24),
-
-              // Always show the description field
-              const Text(
-                'Description',
-                style: TextStyle(fontSize: 16, color: Colors.grey),
-              ),
-              const SizedBox(height: 8),
-              TextField(
-                controller: descriptionController,
-                maxLines: 4,
-                decoration: InputDecoration(
-                  hintText: 'What are you working on now?',
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(12),
-                  ),
+                const SizedBox(height: 16),
+                Text(
+                  'Start Time',
+                  style: Theme.of(context).textTheme.bodyMedium,
                 ),
-              ),
-
-              const SizedBox(height: 24),
-
-              Wrap(
-                spacing: 8,
-                children: [
-                  for(final lable in ['Work','Study','Relax','Exericse'])
-                  ActionChip(label: Text(lable),
-                  onPressed: () {
-                    descriptionController.text = lable;
-                    descriptionController.selection = TextSelection.fromPosition(
-                      TextPosition(offset: descriptionController.text.length),
-                    );
-                    setState(() {});
-                  },
-                  )
-                ],
-              ),
-
-              if (!isTracking)
-                ElevatedButton(
-                  onPressed: _startTimer,
-                  style: ElevatedButton.styleFrom(
-                    minimumSize: const Size.fromHeight(50),
-                    backgroundColor: Colors.blue,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(16),
+                Text(
+                  startTime != null ? dateFormat.format(startTime!) : '--:--',
+                  style: Theme.of(context).textTheme.titleMedium,
+                ),
+                const SizedBox(height: 32),
+                Center(
+                  child: Text(
+                    _formatDuration(elapsed),
+                    style: Theme.of(context).textTheme.displayMedium?.copyWith(
+                      fontWeight: FontWeight.bold,
                     ),
                   ),
-                  child: const Text('Start', style: TextStyle(fontSize: 18)),
                 ),
-
-              if (isTracking)
-                ElevatedButton(
-                  onPressed: _stopTimer,
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.blue,
-                    minimumSize: const Size.fromHeight(50),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(16),
+                const SizedBox(height: 24),
+                Text(
+                  'Description',
+                  style: Theme.of(context).textTheme.bodyMedium,
+                ),
+                const SizedBox(height: 8),
+                TextField(
+                  controller: descriptionController,
+                  maxLines: 4,
+                  decoration: InputDecoration(
+                    hintText: 'What are you working on now?',
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(12),
                     ),
                   ),
-                  child: const Text('Stop', style: TextStyle(fontSize: 18)),
                 ),
-            ],
+                const SizedBox(height: 24),
+                Wrap(
+                  spacing: 8,
+                  children: [
+                    for (final label in ['Work', 'Study', 'Relax', 'Exercise'])
+                      ActionChip(
+                        label: Text(label),
+                        onPressed: () {
+                          descriptionController.text = label;
+                          descriptionController
+                              .selection = TextSelection.fromPosition(
+                            TextPosition(
+                              offset: descriptionController.text.length,
+                            ),
+                          );
+                          setState(() {});
+                        },
+                      ),
+                  ],
+                ),
+                if (!isTracking)
+                  ElevatedButton(
+                    onPressed: _startTimer,
+                    style: ElevatedButton.styleFrom(
+                      minimumSize: const Size.fromHeight(50),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(16),
+                      ),
+                    ),
+                    child: const Text('Start', style: TextStyle(fontSize: 18)),
+                  ),
+                if (isTracking)
+                  ElevatedButton(
+                    onPressed: _stopTimer,
+                    style: ElevatedButton.styleFrom(
+                      minimumSize: const Size.fromHeight(50),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(16),
+                      ),
+                    ),
+                    child: const Text('Stop', style: TextStyle(fontSize: 18)),
+                  ),
+              ],
+            ),
           ),
         ),
       ),
