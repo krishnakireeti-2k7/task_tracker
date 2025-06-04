@@ -21,7 +21,9 @@ class MyApp extends ConsumerWidget {
     final themeMode = ref.watch(themeProvider);
     return MaterialApp(
       title: 'Task Tracker',
-      theme: appThemes[themeMode],
+      theme: appThemes[AppThemeModes.light],
+      darkTheme: appThemes[AppThemeModes.dark],
+      themeMode: themeMode == AppThemeModes.light ? ThemeMode.light : ThemeMode.dark,
       home: HomeScreen(),
     );
   }

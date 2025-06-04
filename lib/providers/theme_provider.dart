@@ -9,11 +9,13 @@ final appThemes = {
     colorScheme: ColorScheme.fromSeed(
       seedColor: Color(0xFF80B680),
       brightness: Brightness.light,
+      surface: Color(0xFFECEFF1),
     ),
-    scaffoldBackgroundColor: Colors.grey[50],
-    appBarTheme: AppBarTheme(backgroundColor: Color(0xFF80B680)),
+    cardColor: Color(0xFFECEFF1), 
+    scaffoldBackgroundColor: Color(0xFFF5F3EF),
+    appBarTheme: AppBarTheme(backgroundColor: Color(0xFFE4E0DA)),
     floatingActionButtonTheme: FloatingActionButtonThemeData(
-      backgroundColor: Color(0xFF80B680),
+      backgroundColor: Color(0xFFA3BCE2),
     ),
     inputDecorationTheme: InputDecorationTheme(border: OutlineInputBorder()),
   ),
@@ -22,11 +24,13 @@ final appThemes = {
     colorScheme: ColorScheme.fromSeed(
       seedColor: Colors.blue,
       brightness: Brightness.dark,
+      surface: Colors.blueGrey,
     ),
-    scaffoldBackgroundColor: Colors.grey[900],
-    appBarTheme: AppBarTheme(backgroundColor: Colors.blue[400]),
+    cardColor: Colors.blueGrey,
+    scaffoldBackgroundColor: Color(0xFF222827),
+    appBarTheme: AppBarTheme(backgroundColor: Color.fromARGB(255, 90, 58, 21)),
     floatingActionButtonTheme: FloatingActionButtonThemeData(
-      backgroundColor: Colors.blue[400],
+      backgroundColor: Colors.blueGrey,
     ),
     inputDecorationTheme: InputDecorationTheme(border: OutlineInputBorder()),
   ),

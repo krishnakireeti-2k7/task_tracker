@@ -19,7 +19,7 @@ class TaskTile extends ConsumerWidget {
         '${task.endTime.hour}:${task.endTime.minute.toString().padLeft(2, '0')}',
       ),
       trailing: IconButton(
-        icon: const Icon(Icons.delete, color: Colors.red),
+        icon: const Icon(Icons.delete, color: Colors.grey),
         onPressed: () {
           ref.read(taskProvider.notifier).deleteTask(index);
         },

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:task_tracker/providers/task_providers.dart';
 import 'package:task_tracker/screens/task_tracking_screen.dart';
+import 'package:task_tracker/widgets/app_drawer.dart';
 import 'package:task_tracker/widgets/task_tile.dart';
 
 class HomeScreen extends ConsumerWidget {
@@ -11,21 +12,7 @@ class HomeScreen extends ConsumerWidget {
     final tasks = ref.watch(taskProvider);
     return Scaffold(
       appBar: AppBar(title: Text('Task Tracker'), centerTitle: true),
-      drawer: Drawer(
-        child: ListView(
-          padding: EdgeInsets.zero,
-          children: [
-            DrawerHeader(child: Text('Menu'),decoration: BoxDecoration(color: Colors.blue),),
-            ListTile(
-              leading: Icon(Icons.home),
-              title: Text('Home'),
-              onTap: () {
-                Navigator.pop(context); // Close the drawer
-              },
-            ),
-          ],
-        ),
-      ),
+      drawer: AppDrawer(),
       body:
           tasks.isEmpty
               ? const Center(child: Text('No tasks Added yet. Start Working!'))
@@ -46,4 +33,8 @@ class HomeScreen extends ConsumerWidget {
       ),
     );
   }
+}
+
+Color getCardColor(BuildContext context) {
+  return Theme.of(context).colorScheme.surface;
 }
