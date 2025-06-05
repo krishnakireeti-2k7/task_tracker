@@ -6,7 +6,8 @@ import 'package:task_tracker/models/task.dart';
 import 'package:task_tracker/providers/task_providers.dart';
 
 class TaskTrackingScreen extends ConsumerStatefulWidget {
-  const TaskTrackingScreen({super.key});
+  final Task? task;
+  const TaskTrackingScreen({super.key, this.task});
 
   @override
   ConsumerState<TaskTrackingScreen> createState() => _TaskTrackingScreenState();

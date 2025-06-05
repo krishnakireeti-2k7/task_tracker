@@ -55,7 +55,8 @@ void showTaskDetails(BuildContext context, WidgetRef ref, Task task) {
                       const SizedBox(height: 16),
                       Text(
                         task.title,
-                        style: theme.textTheme.headlineSmall?.copyWith(
+                        style: theme.textTheme.headlineLarge?.copyWith(
+                          fontSize: 16,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
@@ -64,30 +65,36 @@ void showTaskDetails(BuildContext context, WidgetRef ref, Task task) {
                         children: [
                           Icon(
                             Icons.play_arrow_rounded,
-                            color: theme.colorScheme.primary,
+                            color: const Color.fromARGB(255, 46, 134, 49),
+                            size: 28,
                           ),
                           const SizedBox(width: 8),
                           Text(
                             'Start: ${timeFormatter.format(task.startTime)}',
-                            style: theme.textTheme.bodyMedium,
+                            style: theme.textTheme.bodyLarge?.copyWith(
+                              fontSize: 15,
+                            ),
                           ),
                         ],
                       ),
-                      const SizedBox(height: 8),
+                      const SizedBox(height: 6),
                       Row(
                         children: [
-                          Icon(Icons.stop_rounded, color: Colors.redAccent),
+                          Icon(Icons.stop_rounded, color: Colors.redAccent,size: 25,),
                           const SizedBox(width: 8),
                           Text(
                             'End: ${timeFormatter.format(task.endTime)}',
-                            style: theme.textTheme.bodyMedium,
+                            style: theme.textTheme.bodyLarge?.copyWith(
+                              fontSize: 15,
+                            ),
                           ),
                         ],
                       ),
                       const SizedBox(height: 16),
                       Text(
                         "Description",
-                        style: theme.textTheme.titleMedium?.copyWith(
+                        style: theme.textTheme.titleLarge?.copyWith(
+                          fontSize: 16,
                           fontWeight: FontWeight.w600,
                         ),
                       ),
@@ -96,7 +103,8 @@ void showTaskDetails(BuildContext context, WidgetRef ref, Task task) {
                         task.description?.trim().isEmpty == false
                             ? task.description!
                             : "No description provided.",
-                        style: theme.textTheme.bodyMedium?.copyWith(
+                        style: theme.textTheme.bodyLarge?.copyWith(
+                          fontSize: 15,
                           color: Colors.grey.shade700,
                         ),
                       ),

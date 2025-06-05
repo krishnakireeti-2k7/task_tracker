@@ -30,7 +30,7 @@ final appThemes = {
     colorScheme: ColorScheme.fromSeed(
       seedColor: Colors.blue,
       brightness: Brightness.dark,
-      surface: Colors.blueGrey,
+      surface: Color(0xFF2B2B2B),
     ),
     bottomAppBarTheme: BottomAppBarTheme(
       color: Color.fromARGB(255, 80, 47, 9),
