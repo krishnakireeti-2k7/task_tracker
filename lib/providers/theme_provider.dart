@@ -36,5 +36,5 @@ final appThemes = {
   ),
 };
 final themeProvider = StateProvider<AppThemeModes>((ref) {
-  return AppThemeModes.dark;
+  return AppThemeModes.light;
 });
