@@ -16,7 +16,7 @@ final appThemes = {
       elevation: 8,
       shape: CircularNotchedRectangle(),
     ),
-    cardColor: Color(0xFFECEFF1), 
+    cardColor: Color(0xFFECEFF1),
     scaffoldBackgroundColor: Color(0xFFF5F3EF),
     appBarTheme: AppBarTheme(backgroundColor: Color(0xFFE4E0DA)),
     floatingActionButtonTheme: FloatingActionButtonThemeData(
@@ -33,19 +33,22 @@ final appThemes = {
       surface: Colors.blueGrey,
     ),
     bottomAppBarTheme: BottomAppBarTheme(
-      color: Color(0xFF222827),
+      color: Color.fromARGB(255, 117, 64, 3),
       elevation: 8,
-      shape: CircularNotchedRectangle()
+      shape: CircularNotchedRectangle(),
     ),
     cardColor: Colors.blueGrey,
     scaffoldBackgroundColor: Color(0xFF222827),
-    appBarTheme: AppBarTheme(backgroundColor: Color.fromARGB(255, 90, 58, 21)),
+    appBarTheme: AppBarTheme(
+      backgroundColor: Color.fromARGB(255, 204, 131, 48),
+    ),
     floatingActionButtonTheme: FloatingActionButtonThemeData(
+      shape: CircleBorder(),
       backgroundColor: Colors.blueGrey,
     ),
     inputDecorationTheme: InputDecorationTheme(border: OutlineInputBorder()),
   ),
 };
 final themeProvider = StateProvider<AppThemeModes>((ref) {
-  return AppThemeModes.light;
+  return AppThemeModes.dark;
 });
