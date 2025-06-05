@@ -30,7 +30,11 @@ class HomeScreen extends ConsumerWidget {
                     itemBuilder: (context, index) {
                       return GestureDetector(
                         onTap: () {
-                          showTaskDetails(context, tasks[index]);
+                          showTaskDetails(
+                            context,
+                            ref,
+                            tasks[index],
+                          ); // Pass 'ref' as the second argument
                         },
                         child: TaskTile(task: tasks[index], index: index),
                       );

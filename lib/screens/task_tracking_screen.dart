@@ -20,7 +20,10 @@ class _TaskTrackingScreenState extends ConsumerState<TaskTrackingScreen> {
 
   bool isTracking = false;
 
-  final TextEditingController descriptionController = TextEditingController();
+  final TextEditingController titleController =
+      TextEditingController(); // Title controller
+  final TextEditingController descriptionController =
+      TextEditingController(); // Description controller
 
   /// Starts the timer and sets the start time
   void _startTimer() {
@@ -43,8 +46,14 @@ class _TaskTrackingScreenState extends ConsumerState<TaskTrackingScreen> {
     final newTask = Task(
       startTime: startTime!,
       endTime: endTime!,
-      title: descriptionController.text.trim(),
-      description: descriptionController.text.trim(), // Pass the description
+      title:
+          titleController.text.trim().isEmpty
+              ? 'Untitled Task' // Default title if empty
+              : titleController.text.trim(),
+      description:
+          descriptionController.text.trim().isEmpty
+              ? null // No description if empty
+              : descriptionController.text.trim(),
     );
 
     ref.read(taskProvider.notifier).addTask(newTask);
@@ -64,6 +73,7 @@ class _TaskTrackingScreenState extends ConsumerState<TaskTrackingScreen> {
   @override
   void dispose() {
     _timer?.cancel();
+    titleController.dispose();
     descriptionController.dispose();
     super.dispose();
   }
@@ -73,7 +83,7 @@ class _TaskTrackingScreenState extends ConsumerState<TaskTrackingScreen> {
     final dateFormat = DateFormat.yMMMd().add_jm();
 
     return Scaffold(
-      backgroundColor: Colors.white,
+      //backgroundColor: Colors.white,
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.all(24),
@@ -82,8 +92,8 @@ class _TaskTrackingScreenState extends ConsumerState<TaskTrackingScreen> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 const Text(
-                  'Task Tracker',
-                  style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold),
+                  'Start tracking ',
+                  style: TextStyle(fontSize: 22, fontWeight: FontWeight.w500),
                 ),
                 const SizedBox(height: 16),
 
@@ -92,7 +102,7 @@ class _TaskTrackingScreenState extends ConsumerState<TaskTrackingScreen> {
                   style: TextStyle(fontSize: 16, color: Colors.grey),
                 ),
                 Text(
-                  startTime != null ? dateFormat.format(startTime!) : '--:--',
+                  startTime != null ? dateFormat.format(startTime!) : '--',
                   style: const TextStyle(fontSize: 18),
                 ),
 
@@ -110,7 +120,48 @@ class _TaskTrackingScreenState extends ConsumerState<TaskTrackingScreen> {
 
                 const SizedBox(height: 24),
 
-                // Always show the description field
+                // Title field
+                const Text(
+                  'Title',
+                  style: TextStyle(fontSize: 16, color: Colors.grey),
+                ),
+                const SizedBox(height: 8),
+                TextField(
+                  controller: titleController,
+                  maxLines: 1,
+                  decoration: InputDecoration(
+                    hintText: 'Enter a title or use quick tags',
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                  ),
+                ),
+
+                const SizedBox(height: 16),
+
+                // Quick tags for title
+                Wrap(
+                  spacing: 8,
+                  children: [
+                    for (final label in ['Work', 'Study', 'Relax', 'Exercise'])
+                      ActionChip(
+                        label: Text(label),
+                        onPressed: () {
+                          titleController.text =
+                              label; // Set title from quick tag
+                          titleController
+                              .selection = TextSelection.fromPosition(
+                            TextPosition(offset: titleController.text.length),
+                          );
+                          setState(() {});
+                        },
+                      ),
+                  ],
+                ),
+
+                const SizedBox(height: 24),
+
+                // Description field
                 const Text(
                   'Description',
                   style: TextStyle(fontSize: 16, color: Colors.grey),
@@ -128,26 +179,6 @@ class _TaskTrackingScreenState extends ConsumerState<TaskTrackingScreen> {
                 ),
 
                 const SizedBox(height: 24),
-
-                Wrap(
-                  spacing: 8,
-                  children: [
-                    for (final lable in ['Work', 'Study', 'Relax', 'Exericse'])
-                      ActionChip(
-                        label: Text(lable),
-                        onPressed: () {
-                          descriptionController.text = lable;
-                          descriptionController
-                              .selection = TextSelection.fromPosition(
-                            TextPosition(
-                              offset: descriptionController.text.length,
-                            ),
-                          );
-                          setState(() {});
-                        },
-                      ),
-                  ],
-                ),
 
                 if (!isTracking)
                   ElevatedButton(
