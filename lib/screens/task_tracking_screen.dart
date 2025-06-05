@@ -44,6 +44,7 @@ class _TaskTrackingScreenState extends ConsumerState<TaskTrackingScreen> {
       startTime: startTime!,
       endTime: endTime!,
       title: descriptionController.text.trim(),
+      description: descriptionController.text.trim(), // Pass the description
     );
 
     ref.read(taskProvider.notifier).addTask(newTask);
@@ -72,6 +73,7 @@ class _TaskTrackingScreenState extends ConsumerState<TaskTrackingScreen> {
     final dateFormat = DateFormat.yMMMd().add_jm();
 
     return Scaffold(
+      backgroundColor: Colors.white,
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.all(24),
@@ -79,34 +81,39 @@ class _TaskTrackingScreenState extends ConsumerState<TaskTrackingScreen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
+                const Text(
                   'Task Tracker',
-                  style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-                    fontWeight: FontWeight.bold,
-                  ),
+                  style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold),
                 ),
                 const SizedBox(height: 16),
-                Text(
+
+                const Text(
                   'Start Time',
-                  style: Theme.of(context).textTheme.bodyMedium,
+                  style: TextStyle(fontSize: 16, color: Colors.grey),
                 ),
                 Text(
                   startTime != null ? dateFormat.format(startTime!) : '--:--',
-                  style: Theme.of(context).textTheme.titleMedium,
+                  style: const TextStyle(fontSize: 18),
                 ),
+
                 const SizedBox(height: 32),
+
                 Center(
                   child: Text(
                     _formatDuration(elapsed),
-                    style: Theme.of(context).textTheme.displayMedium?.copyWith(
+                    style: const TextStyle(
+                      fontSize: 48,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
                 ),
+
                 const SizedBox(height: 24),
-                Text(
+
+                // Always show the description field
+                const Text(
                   'Description',
-                  style: Theme.of(context).textTheme.bodyMedium,
+                  style: TextStyle(fontSize: 16, color: Colors.grey),
                 ),
                 const SizedBox(height: 8),
                 TextField(
@@ -119,15 +126,17 @@ class _TaskTrackingScreenState extends ConsumerState<TaskTrackingScreen> {
                     ),
                   ),
                 ),
+
                 const SizedBox(height: 24),
+
                 Wrap(
                   spacing: 8,
                   children: [
-                    for (final label in ['Work', 'Study', 'Relax', 'Exercise'])
+                    for (final lable in ['Work', 'Study', 'Relax', 'Exericse'])
                       ActionChip(
-                        label: Text(label),
+                        label: Text(lable),
                         onPressed: () {
-                          descriptionController.text = label;
+                          descriptionController.text = lable;
                           descriptionController
                               .selection = TextSelection.fromPosition(
                             TextPosition(
@@ -139,21 +148,25 @@ class _TaskTrackingScreenState extends ConsumerState<TaskTrackingScreen> {
                       ),
                   ],
                 ),
+
                 if (!isTracking)
                   ElevatedButton(
                     onPressed: _startTimer,
                     style: ElevatedButton.styleFrom(
                       minimumSize: const Size.fromHeight(50),
+                      backgroundColor: Colors.blue,
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(16),
                       ),
                     ),
                     child: const Text('Start', style: TextStyle(fontSize: 18)),
                   ),
+
                 if (isTracking)
                   ElevatedButton(
                     onPressed: _stopTimer,
                     style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.blue,
                       minimumSize: const Size.fromHeight(50),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(16),

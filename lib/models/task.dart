@@ -3,7 +3,7 @@ import 'package:hive/hive.dart';
 part 'task.g.dart';
 
 @HiveType(typeId: 0)
-class Task extends HiveObject{
+class Task extends HiveObject {
   @HiveField(0)
   String title;
 
@@ -13,5 +13,13 @@ class Task extends HiveObject{
   @HiveField(2)
   DateTime endTime;
 
-  Task({required this.title, required this.startTime, required this.endTime});
+  @HiveField(3)
+  String? description;
+
+  Task({
+    required this.title,
+    required this.startTime,
+    required this.endTime,
+    required this.description,
+  });
 }

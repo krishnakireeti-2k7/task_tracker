@@ -11,10 +11,16 @@ final appThemes = {
       brightness: Brightness.light,
       surface: Color(0xFFECEFF1),
     ),
+    bottomAppBarTheme: BottomAppBarTheme(
+      color: Color(0xFFE4E0DA),
+      elevation: 8,
+      shape: CircularNotchedRectangle(),
+    ),
     cardColor: Color(0xFFECEFF1), 
     scaffoldBackgroundColor: Color(0xFFF5F3EF),
     appBarTheme: AppBarTheme(backgroundColor: Color(0xFFE4E0DA)),
     floatingActionButtonTheme: FloatingActionButtonThemeData(
+      shape: CircleBorder(),
       backgroundColor: Color(0xFFA3BCE2),
     ),
     inputDecorationTheme: InputDecorationTheme(border: OutlineInputBorder()),
@@ -25,6 +31,11 @@ final appThemes = {
       seedColor: Colors.blue,
       brightness: Brightness.dark,
       surface: Colors.blueGrey,
+    ),
+    bottomAppBarTheme: BottomAppBarTheme(
+      color: Color(0xFF222827),
+      elevation: 8,
+      shape: CircularNotchedRectangle()
     ),
     cardColor: Colors.blueGrey,
     scaffoldBackgroundColor: Color(0xFF222827),
