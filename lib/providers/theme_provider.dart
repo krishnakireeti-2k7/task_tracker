@@ -27,26 +27,61 @@ final appThemes = {
   ),
   AppThemeModes.dark: ThemeData(
     brightness: Brightness.dark,
+    useMaterial3: true,
     colorScheme: ColorScheme.fromSeed(
-      seedColor: Colors.blue,
+      seedColor: Color(0xFF80B680), // matching greenish-gray accent
       brightness: Brightness.dark,
-      surface: Color(0xFF2B2B2B),
+      surface: Color(0xFF1E1E1E),
+    ),
+    scaffoldBackgroundColor: Color(0xFF181A1B), // deep matte gray
+    appBarTheme: AppBarTheme(
+      backgroundColor: Color(0xFF2B2B2B),
+      foregroundColor: Colors.white,
+      elevation: 4,
+      shadowColor: Colors.black.withOpacity(0.5),
+      titleTextStyle: TextStyle(
+        fontSize: 20,
+        fontWeight: FontWeight.w600,
+        color: Colors.white,
+      ),
     ),
     bottomAppBarTheme: BottomAppBarTheme(
-      color: Color.fromARGB(255, 80, 47, 9),
+      color: Color(0xFF2B2B2B),
       elevation: 8,
       shape: CircularNotchedRectangle(),
+      shadowColor: Colors.black.withOpacity(0.5),
     ),
-    cardColor: Colors.blueGrey,
-    scaffoldBackgroundColor: Color(0xFF222827),
-    appBarTheme: AppBarTheme(backgroundColor: Color.fromARGB(255, 80, 47, 9)),
+    cardColor: Color(
+      0xFF222527,
+    ), // soft card background, lifted slightly from scaffold
     floatingActionButtonTheme: FloatingActionButtonThemeData(
       shape: CircleBorder(),
-      backgroundColor: Colors.blueGrey,
+      backgroundColor: Color(0xFF80B680), // muted green accent
+      foregroundColor: Colors.black,
+      elevation: 6,
     ),
-    inputDecorationTheme: InputDecorationTheme(border: OutlineInputBorder()),
-  ),
+    inputDecorationTheme: InputDecorationTheme(
+      filled: true,
+      fillColor: Color(0xFF2D2D2D),
+      border: OutlineInputBorder(
+        borderSide: BorderSide(color: Color(0xFF80B680)),
+        borderRadius: BorderRadius.circular(10),
+      ),
+      focusedBorder: OutlineInputBorder(
+        borderSide: BorderSide(color: Color(0xFF80B680), width: 2),
+        borderRadius: BorderRadius.circular(10),
+      ),
+      hintStyle: TextStyle(color: Colors.grey[400]),
+      labelStyle: TextStyle(color: Color(0xFF80B680)),
+    ),
+    textTheme: TextTheme(
+      bodyLarge: TextStyle(color: Colors.white, fontSize: 16),
+      bodyMedium: TextStyle(color: Color(0xFFCCCCCC), fontSize: 14),
+      labelLarge: TextStyle(color: Color(0xFF80B680)),
+    ),
+  )
+
 };
 final themeProvider = StateProvider<AppThemeModes>((ref) {
-  return AppThemeModes.light;
+  return AppThemeModes.dark;
 });
