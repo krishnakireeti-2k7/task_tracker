@@ -40,15 +40,14 @@ class HomeScreen extends ConsumerWidget {
                       );
                     },
                   ))
-              : Center(
-                child: Text('Analytics'),
-              ), // Replace with your settings widget
+              : Container(), // Replace with your settings widget
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           Navigator.push(
             context,
             MaterialPageRoute(builder: (_) => TaskTrackingScreen()),
           );
+          ref.invalidate(taskProvider);
         },
         child: Icon(Icons.add),
       ),

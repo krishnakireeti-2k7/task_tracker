@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
 import 'package:task_tracker/models/task.dart';
 import 'package:task_tracker/providers/theme_provider.dart';
+import 'package:task_tracker/screens/task_tracking_screen.dart';
 
 void showTaskDetails(BuildContext context, WidgetRef ref, Task task) {
   // Get the current theme mode from the provider
@@ -108,6 +109,32 @@ void showTaskDetails(BuildContext context, WidgetRef ref, Task task) {
                           color: Colors.grey.shade700,
                         ),
                       ),
+                                            const SizedBox(height: 24),
+                      Center(
+                        child: ElevatedButton.icon(
+                          onPressed: () {
+                            Navigator.of(
+                              context,
+                            ).pop(); // Close the bottom sheet
+                            Navigator.of(context).push(
+                              MaterialPageRoute(
+                                builder: (_) => TaskTrackingScreen(task: task),
+                              ),
+                            );
+                          },
+                          icon: Icon(Icons.play_circle_fill_rounded, size: 24),
+                          label: Text("Continue"),
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: Colors.blue,
+                            foregroundColor: Colors.white,
+                            minimumSize: Size(double.infinity, 50),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(16),
+                            ),
+                          ),
+                        ),
+                      ),
+
                     ],
                   ),
                 ),

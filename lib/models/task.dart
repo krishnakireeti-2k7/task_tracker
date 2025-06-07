@@ -16,10 +16,15 @@ class Task extends HiveObject {
   @HiveField(3)
   String? description;
 
+  @HiveField(4)
+  Duration duration;
+
+
   Task({
     required this.title,
     required this.startTime,
     required this.endTime,
     required this.description,
+    this.duration = Duration.zero,
   });
 }

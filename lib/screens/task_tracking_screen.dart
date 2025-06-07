@@ -28,38 +28,55 @@ class _TaskTrackingScreenState extends ConsumerState<TaskTrackingScreen> {
 
   /// Starts the timer and sets the start time
   void _startTimer() {
-    startTime = DateTime.now();
+    startTime ??= DateTime.now();
+
     isTracking = true;
+
     _timer = Timer.periodic(const Duration(seconds: 1), (_) {
       setState(() {
-        elapsed = DateTime.now().difference(startTime!);
+        elapsed += const Duration(seconds: 1);
       });
     });
+
     setState(() {});
   }
 
-  /// Stops the timer and saves the task via provider
   void _stopTimer() {
     _timer?.cancel();
+    isTracking = false;
+    if (startTime == null) return;
     endTime = DateTime.now();
 
-    // Save task to provider
-    final newTask = Task(
-      startTime: startTime!,
-      endTime: endTime!,
-      title:
-          titleController.text.trim().isEmpty
-              ? 'Untitled Task' // Default title if empty
-              : titleController.text.trim(),
-      description:
-          descriptionController.text.trim().isEmpty
-              ? null // No description if empty
-              : descriptionController.text.trim(),
-    );
+    if (widget.task != null) {
+      widget.task!
+        ..endTime = endTime!
+        ..title =
+            titleController.text.trim().isEmpty
+                ? 'Untitled Task'
+                : titleController.text.trim()
+        ..description =
+            descriptionController.text.trim().isEmpty
+                ? null
+                : descriptionController.text.trim()
+        ..duration = elapsed; //  Store actual tracked duration
+      widget.task!.save();
+    } else {
+      final newTask = Task(
+        startTime: startTime!,
+        endTime: endTime!,
+        title:
+            titleController.text.trim().isEmpty
+                ? 'Untitled Task'
+                : titleController.text.trim(),
+        description:
+            descriptionController.text.trim().isEmpty
+                ? null
+                : descriptionController.text.trim(),
+        duration: elapsed, //  Save this
+      );
+      ref.read(taskProvider.notifier).addTask(newTask);
+    }
 
-    ref.read(taskProvider.notifier).addTask(newTask);
-
-    // Pop back to home screen
     Navigator.pop(context);
   }
 
@@ -69,6 +86,21 @@ class _TaskTrackingScreenState extends ConsumerState<TaskTrackingScreen> {
     final m = duration.inMinutes.remainder(60).toString().padLeft(2, '0');
     final s = duration.inSeconds.remainder(60).toString().padLeft(2, '0');
     return '$h:$m:$s';
+  }
+
+  @override
+  void initState() {
+    super.initState();
+
+    if (widget.task != null) {
+      titleController.text = widget.task!.title;
+      descriptionController.text = widget.task!.description ?? '';
+      startTime = widget.task!.startTime;
+      elapsed = widget.task!.duration;
+      _startTimer();
+    } else {
+      elapsed = Duration.zero; // Explicitly reset
+    }
   }
 
   @override
