@@ -5,6 +5,8 @@ Features
 
     - [ ] Add analytics page where it you have visual representation of your tasks
 
+     -[ ] Add a screen for themes where you would display multiple themes and user could select from then 
+
     -[ ] if the task is marked completed then it should disappear in 24 hours and if not then  it should stay until deleted (make the continue button work for it until deleted)
 
 
