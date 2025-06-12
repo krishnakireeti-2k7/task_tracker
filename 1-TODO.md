@@ -11,6 +11,8 @@ Features
     
     - [] Add scrollabel delete feature
 
+    - [] In task tracking screen there are tags you should be able to add custom tags 
+
 
 Themes
     - [] Add color gradients to the background

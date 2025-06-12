@@ -2,25 +2,25 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 enum AppThemeModes { light, dark }
-const lightBackgroundGradient = LinearGradient(
-  begin: Alignment.topLeft,
-  end: Alignment.bottomRight,
-  colors: [
-    Color(0xFFF5F3EF), // Your scaffold background (creamy off-white)
-    Color(0xFFE4E0DA), // Bottom app bar background
-    Color(0xFFDCE9F4), // Pale blue-lavender (from your seedColor)
-  ],
-);
+// const lightBackgroundGradient = LinearGradient(
+//   begin: Alignment.topLeft,
+//   end: Alignment.bottomRight,
+//   colors: [
+//     Color(0xFFF5F3EF), // Your scaffold background (creamy off-white)
+//     Color(0xFFE4E0DA), // Bottom app bar background
+//     Color(0xFFDCE9F4), // Pale blue-lavender (from your seedColor)
+//   ],
+// );
 
-const darkBackgroundGradient = LinearGradient(
-  begin: Alignment.topLeft,
-  end: Alignment.bottomRight,
-  colors: [
-    Color(0xFF181A1B), // Scaffold background
-    Color(0xFF1E1E1E), // Surface
-    Color(0xFF2A2D2E), // Input fill color
-  ],
-);
+// const darkBackgroundGradient = LinearGradient(
+//   begin: Alignment.topLeft,
+//   end: Alignment.bottomRight,
+//   colors: [
+//     Color(0xFF181A1B), // Scaffold background
+//     Color(0xFF1E1E1E), // Surface
+//     Color(0xFF2A2D2E), // Input fill color
+//   ],
+// );
 
 final appThemes = {
   AppThemeModes.light: ThemeData(
